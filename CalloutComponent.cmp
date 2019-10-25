@@ -1,0 +1,30 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" 
+                Controller="CalloutController">
+    
+    <aura:attribute name="request" type="String" />
+    <aura:attribute name="response" type="String" />
+    
+    <lightning:card>
+        <aura:set attribute="title">
+            <span class="slds-text-heading_large">Componente de callout</span>
+        </aura:set>
+        <div class="slds-form-element__control">
+            
+            <div class="slds-m-around_x-small">
+                <lightning:textarea name="request" value="{!v.request}" 
+                                    placeholder="Insira o request aqui..."
+                                    label="Request:"/>
+                
+                <lightning:button variant="brand" label="Realizar callout" title="Realizar callout" 
+                                  onclick="{!c.doCallout}" />
+            </div>
+        </div>
+        
+        <div class="slds-m-around_x-small">
+            <lightning:textarea name="response" readonly="true" 
+                                value="{!v.response}" label="Response:"/>
+        </div>
+        
+    </lightning:card>
+	
+</aura:component>

@@ -1,0 +1,36 @@
+public class CalloutService 
+{
+    public class CalloutServiceException extends Exception{}
+    
+    public CalloutContract contrato {get; set;}
+    
+    Public CalloutService(CalloutContract contrato)
+    {
+        this.contrato = contrato;
+    }
+    
+    Public Object doCallout()
+    {
+        if(contrato == null) throw new CalloutServiceException('Contrato não pode ser nulo');
+        Http httpProtocol = new Http();        
+        HttpRequest request = new HttpRequest();
+        HttpResponse response;
+        try
+        {
+            request.setEndPoint(contrato.getEndPoint());
+            request.setTimeout((Integer)contrato.getTimeout());
+            request.setMethod(contrato.getMethod());
+
+            string body = contrato.getBody();
+            if(!string.isEmpty(body) && body != 'null')request.setBody(body);
+            contrato.setHeader(request);
+            response = httpProtocol.send(request);
+            
+            return contrato.getReturn(response);    
+        }
+        catch(Exception e)
+        {
+            throw new CalloutServiceException(e.getMessage()); 
+        }
+    }
+}

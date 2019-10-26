@@ -1,0 +1,9 @@
+public class CalloutC3CController 
+{
+    @AuraEnabled
+    public static string realizaCallout(String consultaCPFModel)
+    {
+        ConsultaCPFModels consulta = (ConsultaCPFModels) JSON.deserialize(ConsultaCPFModel, ConsultaCPFModels.class);
+        return new ValidacaoCPFService().validaCPF(consulta); 
+    }
+}

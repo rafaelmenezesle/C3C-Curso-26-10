@@ -1,0 +1,26 @@
+public class CalloutValidaCPF extends CalloutContract
+{
+    public string CPF {get; set;}
+    
+    public CalloutValidaCPF(Callout_Configuration__c config, string clieCPFnte)
+    {
+        super(config);
+        this.CPF = clieCPFnte;
+    }
+
+    public override string getEndPoint()
+    {
+        system.debug('CPF:' + this.CPF);
+        return configuration.Endpoint__c + '/' + this.CPF;
+    }
+    
+    public override Object getReturn(HttpResponse response)
+    {
+        return (string) response.getBody();
+    }
+    
+    public override void setHeader(HttpRequest request)
+    {
+        request.setHeader('Authorization','Bearer 00D41000002IZZC!AQ0AQPfMlkdGMssk8hPkPzlCUAVnfUi3ET3MUaLeDXVh6hszRuCAu.bty8QLMfnMOhR67eWw50Ac_GDd..wdicFofNiaPFMl');
+    }
+}

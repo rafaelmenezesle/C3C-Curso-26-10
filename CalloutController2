@@ -1,0 +1,28 @@
+public class CalloutController 
+{
+	@AuraEnabled
+    public static string realizaCallout(String consultaCPFModel)
+    {
+        ConsultaCPFModels consulta = (ConsultaCPFModels) 
+            JSON.deserialize(ConsultaCPFModel, ConsultaCPFModels.class);
+        
+        Http httpProtocol = new Http();        
+        HttpRequest request = new HttpRequest();
+        HttpResponse response;
+        try
+        {
+            request.setEndPoint('https://cunning-bear-224639-dev-ed.my.salesforce.com/services/apexrest/validarCPFAPI/' + consulta.cpf);
+            request.setTimeout(2000);
+            request.setMethod('GET');
+            request.setHeader('Authorization','Bearer 00D41000002IZZC!AQ0AQPfMlkdGMssk8hPkPzlCUAVnfUi3ET3MUaLeDXVh6hszRuCAu.bty8QLMfnMOhR67eWw50Ac_GDd..wdicFofNiaPFMl');
+            response = httpProtocol.send(request);
+            
+            return response.getBody();    
+        }
+        catch(Exception e)
+        {
+            return e.getMessage(); 
+        }
+    }return consultaCPFModel;
+    }
+}

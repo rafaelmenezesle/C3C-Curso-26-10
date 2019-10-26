@@ -1,0 +1,36 @@
+public abstract class CalloutContract 
+{
+    public Callout_Configuration__c configuration {get; set;}
+    
+    public CalloutContract(Callout_Configuration__c config)
+    {
+        this.configuration = config;
+    }
+    
+    public virtual string getEndPoint()
+    {
+        return configuration.Endpoint__c;
+    }
+    
+    public virtual Decimal getTimeout()
+    {
+        return configuration.Timeout__c;
+    }
+    
+    public virtual string getMethod()
+    {        
+        return configuration.Method__c;
+    }
+    
+    public virtual string getBody()
+    {
+    	return '';
+    }
+     
+    public abstract Object getReturn(HttpResponse response);
+    
+    public virtual void setHeader(HttpRequest request)
+    {
+        request.setHeader('Content-Type','application/json;charset=utf-8');
+    }
+}

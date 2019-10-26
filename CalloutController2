@@ -23,6 +23,5 @@ public class CalloutController
         {
             return e.getMessage(); 
         }
-    }return consultaCPFModel;
     }
 }

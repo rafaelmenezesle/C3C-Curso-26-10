@@ -1,0 +1,19 @@
+public class ValidacaoCPFService 
+{
+    public string validaCPF(ConsultaCPFModels cpfModel)
+    {
+        Callout_Configuration__c config = Callout_Configuration__c.getInstance('validaCPF');
+        CalloutValidaCPF callout = new CalloutValidaCPF(config, cpfModel.cpf);
+        
+        CalloutService service = new CalloutService(callout);
+
+        try
+        {
+            return (string) service.doCallout();
+        }
+        catch(Exception e)
+        {
+            return(e.getMessage());
+        }
+    }
+}
